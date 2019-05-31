@@ -3,8 +3,9 @@
 #include <ESP8266WiFi.h>
 
 #define 2 LedAire
-#define 3 ButtonPlus
-#define 4 ButtonLess
+#define 4 ButtonPlus
+#define 0 ButtonLess
+
 DHT dht(dht_pin, DHTTYPE);
 
 int maxmimo = 30;
@@ -17,6 +18,7 @@ void setup(){
     pinMode(ButtonPlus, INPUT_PULLUP);
     pinMode(ButtonLess, INPUT_PULLUP);
     pinMode(LedAire, OUTPUT);
+    Serial.begin(9600)
 }
 
 void loop(){
@@ -27,6 +29,8 @@ void loop(){
         temperatura = dht.readTemperature();
     }
     
+    Serial.println(temperatura);
+
     if (digitalRead(ButtonPlus) == LOW && temp < maximo) {
         temp++;
     }
@@ -37,10 +41,12 @@ void loop(){
     if (temperatura > temp)
     {
         //prende aire
-        digitalWrite(LedAire, HIGH);
+        digitalWrite(LedAire, LOW);
     } 
     else if (temperatura < temp) {
         //apaga aire
-        digitalWrite(LedAire, LOW);
+        digitalWrite(LedAire, HIGH);
     }
+
+    delay(1000);
 }

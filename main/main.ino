@@ -38,9 +38,11 @@ void loop(){
 
     if (digitalRead(ButtonPlus) == LOW && temp < maximo) {
         temp++;
+        Serial.println("Temp set to: " + temp);
     }
     else if (digitalRead(ButtonLess) == LOW && temp > minimo) {
         temp--;
+        Serial.println("Temp set to: " + temp);
     }
     
     if (temperatura > temp)

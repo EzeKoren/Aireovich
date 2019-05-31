@@ -2,30 +2,35 @@
 
 #include <ESP8266WiFi.h>
 
-#define 2 LedAire
-#define 4 ButtonPlus
-#define 0 ButtonLess
+#define LedAire 2
+#define ButtonPlus 4
+#define ButtonLess 0 
+#define Sensor 5
+#define DHTTYPE DHT22
 
-DHT dht(dht_pin, DHTTYPE);
+DHT dht(Sensor, DHTTYPE);
 
-int maxmimo = 30;
+int maximo = 30;
 int minimo = 19;
 int temp = 24;
 float temperatura;
-    
+
+
+
 void setup(){
     dht.begin();
     pinMode(ButtonPlus, INPUT_PULLUP);
     pinMode(ButtonLess, INPUT_PULLUP);
     pinMode(LedAire, OUTPUT);
-    Serial.begin(9600)
+    Serial.begin(9600);
 }
 
 void loop(){
     //chequear si aprieta boton
-    
+
+
     temperatura = dht.readTemperature();
-    while(temperatura < 1 || temperatura(isnan)){
+    while(temperatura < 1 || isnan(temperatura)){
         temperatura = dht.readTemperature();
     }
     
